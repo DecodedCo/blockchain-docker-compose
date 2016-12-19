@@ -1,12 +1,17 @@
+# https://github.com/hyperledger/fabric/tree/master/pub
+
+
 membersrvc:
   image: hyperledger/fabric-membersrvc
   ports:
     - "7054:7054"
   command: membersrvc
+
+
 vp0:
   image: hyperledger/fabric-peer
   ports:
-    - "7050:7050"
+    - "7050:7050" # Default REST API: https://github.com/hyperledger/fabric/blob/master/peer/core.yaml
     - "7051:7051"
     - "7053:7053"
   environment:
@@ -18,7 +23,7 @@ vp0:
     - CORE_PEER_PKI_TCA_PADDR=membersrvc:7054
     - CORE_PEER_PKI_TLSCA_PADDR=membersrvc:7054
     - CORE_SECURITY_ENABLED=false
-    #- CORE_SECURITY_ENROLLID=test_vp0
+    #- CORE_SECURITY_ENROLLID=test_vp0 # defaults from: https://github.com/hyperledger/fabric/blob/v0.6/membersrvc/membersrvc.yaml
     #- CORE_SECURITY_ENROLLSECRET=MwYpmSRjupbT
   links:
     - membersrvc
