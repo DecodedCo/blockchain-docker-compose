@@ -25,12 +25,6 @@ Use the folder `one-peer-one-ca`. The first time start it up with:
 docker-compose up
 ```
 
-After the containers are created you can start using
-
-```
-docker-compose start
-```
-
 To stop the process, in a different shell run
 
 ```
@@ -41,6 +35,12 @@ This will stop the containers, but keep them around (see `docker ps -a`). To rem
 
 ```
 docker rm -f $(docker ps -aq)
+```
+
+If you stop the process and want to restart it, use:
+
+```
+docker-compose start
 ```
 
 
