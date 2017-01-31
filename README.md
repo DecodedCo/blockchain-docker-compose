@@ -2,6 +2,8 @@
 
 Docker files for the blockchain applications
 
+First, clone this repo to your computer.
+
 # Pull the docker containers
 
 Make sure you have Docker running on your mac.
