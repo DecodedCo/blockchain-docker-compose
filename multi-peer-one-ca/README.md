@@ -52,7 +52,7 @@ ls -l /opt/gopath/src/github.com/DecodedCo/blockchain-golang-chaincode
 
 ---
 
-### Registering/Deploying the Chaincode
+### Registering Chaincode
 
 Documentation for HyperLedger CLI is [here](https://github.com/hyperledger/fabric/blob/master/docs/protocol-spec.md#6313-chaincode-deploy)
 
@@ -75,20 +75,7 @@ curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H
 }' "http://0.0.0.0:7050/chaincode"
 ```
 
-The deploy will give you an `ID` that becomes the new `chaincodeID` name.
-
-Reponse will look like
-
-```javascript
-{
-  "jsonrpc":"2.0",
-  "result":{
-    "status":"OK",
-    "message":"8560c262362776aa2600fa43f23217a0ddf3be3224a949fb5ce74336c7248ba0ca7d2bf002f3365832fcaab8e44301d21a5ecc5280990407d852bbb9f97b028e"
-  },
-  "id":0
-}
-```
+The deploy will give you an ID that becomes the new `chaincodeID` name.
 
 ### Security Disabled
 
@@ -172,25 +159,4 @@ If you now `GET` `http://0.0.0.0:7050/network/peers` you should get the followin
     }
   ]
 }
-```
-
-
-
-
-```
-curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d '{
-    "jsonrpc": "2.0", 
-    "method": "query",  
-    "params": {
-        "type":1, 
-        "chaincodeID": {
-            "name":"8560c262362776aa2600fa43f23217a0ddf3be3224a949fb5ce74336c7248ba0ca7d2bf002f3365832fcaab8e44301d21a5ecc5280990407d852bbb9f97b028e"
-        }, 
-        "ctorMsg": { 
-            "function":"read", 
-            "args": [ "Owners" ] 
-        } 
-    },
-    "id": 1337
-}' "http://0.0.0.0:7050/chaincode"
 ```
