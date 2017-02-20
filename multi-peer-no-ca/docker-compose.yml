@@ -2,12 +2,12 @@
 version: '2'
 
 services:
-  
+
   # Base image.
   baseimage:
     build: ./baseimage
     image: hyperledger/fabric-baseimage:latest
-
+  
 
   vp0:
     extends:

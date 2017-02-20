@@ -1,20 +1,15 @@
 version: '2'
 services:
   vp:
-    image: hyperledger/fabric-peer
+    image: hyperledger/fabric-baseimage:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      # Try mounting our chaincode... First directory is local, second the container.
-      - ${GOPATH}/src/github.com/DecodedCo/blockchain-golang-chaincode:/opt/gopath/src/github.com/DecodedCo/blockchain-golang-chaincode
-      # Also mount the hyperledger code.
-      - ${GOPATH}/src/github.com/hyperledger/fabric:/opt/gopath/src/github.com/hyperledger/fabric
     environment:
       - CORE_PEER_ADDRESSAUTODETECT=true
       - CORE_VM_ENDPOINT=unix:///var/run/docker.sock
-      - CORE_LOGGING_LEVEL=ERROR #INFO
+      - CORE_LOGGING_LEVEL=WARNING #INFO
       # activate for testing in a simulated bluemix blockchain service environment
       - CORE_PEER_VALIDATOR_CONSENSUS_PLUGIN=pbft
       - CORE_PBFT_GENERAL_MODE=batch
       - CORE_PBFT_GENERAL_N=4
-    command: sh -c "sleep 5; peer node start --logging-level=ERROR"
-
+    command: sh -c "sleep 5; peer node start"
