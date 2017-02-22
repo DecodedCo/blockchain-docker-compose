@@ -1,21 +1,26 @@
 # https://github.com/hyperledger/fabric/tree/master/pub
 
-vp0:
-  image: hyperledger/fabric-baseimage:latest
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    ## Try mounting our chaincode... First directory is local, second the container.
-    #- ${GOPATH}/src/github.com/DecodedCo/blockchain-golang-chaincode:/opt/gopath/src/github.com/DecodedCo/blockchain-golang-chaincode
-    ## Also mount the hyperledger code.
-    #- ${GOPATH}/src/github.com/hyperledger/fabric:/opt/gopath/src/github.com/hyperledger/fabric
-  ports:
-    - "7050:7050" # Default REST API: https://github.com/hyperledger/fabric/blob/master/peer/core.yaml
-    - "7051:7051"
-    - "7053:7053"
-  environment:
-    - CORE_PEER_ADDRESSAUTODETECT=true
-    - CORE_VM_ENDPOINT=unix:///var/run/docker.sock
-    - CORE_LOGGING_LEVEL=ERROR
-    - CORE_PEER_ID=vp0
-    - CORE_SECURITY_ENABLED=false
-  command: sh -c "sleep 5; peer node start"
+version: '2'
+
+services:
+
+  # Base image.
+  baseimage:
+    build: ../baseimage
+    image: hyperledger/fabric-baseimage:latest
+
+  vp0:
+    image: hyperledger/fabric-baseimage:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "7050:7050" # Default REST API: https://github.com/hyperledger/fabric/blob/master/peer/core.yaml
+      - "7051:7051"
+      - "7053:7053"
+    environment:
+      - CORE_PEER_ADDRESSAUTODETECT=true
+      - CORE_VM_ENDPOINT=unix:///var/run/docker.sock
+      - CORE_LOGGING_LEVEL=ERROR
+      - CORE_PEER_ID=vp0
+      - CORE_SECURITY_ENABLED=false
+    command: sh -c "sleep 5; peer node start"
