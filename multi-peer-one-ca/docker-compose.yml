@@ -5,7 +5,7 @@ services:
   
   # Base image.
   baseimage:
-    build: ./baseimage
+    build: ../baseimage
     image: hyperledger/fabric-baseimage:latest
   
   # Certificate authority.
@@ -14,8 +14,6 @@ services:
     ports:
       - "7054:7054"
     environment:
-      # - MEMBERSRVC_CA_ACA_ENABLED=true
-      # - MEMBERSRVC_LOGGING_LEVEL=DEBUG
       - MEMBERSRVC_CA_LOGGING_SERVER=WARNING # INFO
       - MEMBERSRVC_CA_LOGGING_CA=WARNING 
       - MEMBERSRVC_CA_LOGGING_ECA=WARNING 
@@ -27,8 +25,6 @@ services:
       - MEMBERSRVC_CA_LOGGING_TCAP=WARNING 
       - MEMBERSRVC_CA_LOGGING_TCAA=WARNING 
       - MEMBERSRVC_CA_LOGGING_TLSCA=WARNING 
-    # volumes:
-      # - ./blockchain/membersrvc.yaml:/opt/gopath/src/github.com/hyperledger/fabric/membersrvc/membersrvc.0.6.yaml
     command: membersrvc
 
 

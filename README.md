@@ -35,12 +35,21 @@ This will stop the containers, but keep them around (see `docker ps -a`). To rem
 
 ```
 docker rm -f $(docker ps -aq)
+
+# Combined
+docker-compose stop; docker rm -f $(docker ps -aq);
 ```
 
 If you stop the process and want to restart it, use:
 
 ```
 docker-compose start
+```
+
+Remove all untagged images (don't just use this)
+
+```
+docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
 ```
 
 
@@ -104,4 +113,10 @@ docker inspect <containerID>
 
 ```
 docker logs -f <containerID>
+```
+
+11. Get a shell in a container
+
+```
+docker exec -it <containerID> bin/bash
 ```
